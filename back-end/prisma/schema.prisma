@@ -9,3 +9,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id  String  @id @default(uuid())
+  firstName  String
+  lastName  String
+  nickname  String
+  email String
+  password  String
+  document  Notes[]
+}
+
+model Notes {
+  id  String  @id @default(uuid())
+  title String
+  paragraph String
+  userId  String
+  user User @relation(references: [id], fields: [userId])
+}
+
+model Task {
+  id  String  @id @default(uuid())
+  title String
+  description String
+  done  Boolean
+  Notes Boolean
+}
